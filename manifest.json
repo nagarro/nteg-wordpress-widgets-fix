@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "NTEG Wordpress Widgets Fix",
+  "version": "0.1.0",
+  "description": "Chrome extension to fix the widgets resetting problem on the NTEG wordpress installation. Install as an unpacked extension.",
+  "permissions": [
+    "tabs",
+    "http://nteg.nagarro.com/wp-admin/widgets.php"
+  ],
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "Fix the widgets resetting problem!"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
