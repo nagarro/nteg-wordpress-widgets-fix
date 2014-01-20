@@ -28,13 +28,16 @@
         saveButtons = [];
 
     $(".widget-liquid-right .widget .widget-context .wl-incexc select")
-        .val("selected")
         .each(function () {
             var el = $(this),
                 widgetEl = el.closest(".widget"),
                 widgetName = widgetEl.find(".widget-top .widget-title h4").text(),
                 madeChange;
 
+            if (el.val() !== "selected") {
+                el.val("selected");
+                madeChange = true;
+            }
             selectionOptions[widgetName].forEach(function (pageType) {
                 var checkBox = widgetEl.find(".wl-is-" + pageType).find("input");
                 if (!checkBox.is(":checked")) {
@@ -62,6 +65,7 @@
 
     var nextTime = 0;
     saveButtons.forEach(function (button) {
+        chrome.extension.sendRequest("fixing");
         setTimeout(function () {
             console.log("Clicking button: " + $(button).attr("id"));
             $(button).click();
@@ -69,7 +73,10 @@
     });
 
     setTimeout(function () {
-        alert("Done!");
+        alert("Widget settings fixed!");
+        
+        chrome.extension.sendRequest("fixed");
+        
     }, (nextTime += 2000));
 
 }());
