@@ -65,7 +65,6 @@
 
     var nextTime = 0;
     saveButtons.forEach(function (button) {
-        chrome.extension.sendRequest("fixing");
         setTimeout(function () {
             console.log("Clicking button: " + $(button).attr("id"));
             $(button).click();
@@ -74,8 +73,6 @@
 
     setTimeout(function () {
         alert("Widget settings fixed!");
-        
-        chrome.extension.sendRequest("fixed");
         
     }, (nextTime += 2000));
 
