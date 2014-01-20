@@ -1,5 +1,6 @@
 var tabId,
-    showHideInterval;
+    showHideInterval,
+    firstRun = true;
 
 function hidePageAction() {
     chrome.pageAction.hide(tabId);
@@ -15,8 +16,12 @@ function hidePageAction() {
 }
 
 chrome.pageAction.onClicked.addListener(function() {
-    chrome.tabs.executeScript(null, { file: "jquery.js" });
-    chrome.tabs.executeScript(null, { file: "widgets-fix.js" });
+    if (firstRun) {
+        chrome.tabs.executeScript(null, { file: "jquery.js" });
+        chrome.tabs.executeScript(null, { file: "widgets-fix.js" });
+    } else {
+        chrome.pageAction.show(tabId);
+    }
     
 });
 
